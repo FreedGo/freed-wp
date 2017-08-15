@@ -56,6 +56,10 @@ define('SECURE_AUTH_SALT', '{zwhU#_5d{)|c+CY8xZm]jo>h}I`hH.a.it[`/=jU`g}o%P]_J+l
 define('LOGGED_IN_SALT',   '(fPBk:7gv9w|kWpPRqyIg3`M+r/6=.;<:Sqwd.XIBM+SWcHrI.#!YRhq:hi4bEJo');
 define('NONCE_SALT',       ',9Me[1QF||}Y4Q#:nY)W/Ev{%7Fr$_,-~<>/se|~^%NTnR{5h9mKhz8(-Q9?q~#!');
 
+define("FS_METHOD", "direct");
+define("FS_CHMOD_DIR", 0777);
+define("FS_CHMOD_FILE", 0777);
+
 /**#@-*/
 
 /**
