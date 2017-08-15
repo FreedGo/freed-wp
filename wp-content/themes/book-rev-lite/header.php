@@ -30,23 +30,7 @@
 
 <header id="main-header">
 
-    <section id="top-bar" class="clearfix">
-
-        <div class="container">
-
-            <nav id="top-bar-menu">
-
-                    <?php wp_nav_menu( array( 'theme_location'   => 'secondary') ); ?>
-
-            </nav><!-- end #top-bar-menu -->
-
-
-
-            <?php get_search_form(); ?>
-
-        </div><!-- end .container -->
-
-    </section><!-- end #top-bar -->
+  
 
 
 
