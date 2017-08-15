@@ -141,10 +141,10 @@ class CodeColorerLoader
 
             // TinyMCE
             // temporarily disabled
-            // if (get_user_option('rich_editing') == 'true') {
-            //   add_filter('mce_external_plugins', array('CodeColorerLoader', 'addTinyMCEPlugin'));
-            //   add_filter('mce_buttons', array('CodeColorerLoader', 'registerTinyMCEButton'));
-            // }
+            if (get_user_option('rich_editing') == 'true') {
+              add_filter('mce_external_plugins', array('CodeColorerLoader', 'addTinyMCEPlugin'));
+              add_filter('mce_buttons', array('CodeColorerLoader', 'registerTinyMCEButton'));
+            }
             add_filter('tiny_mce_before_init', array('CodeColorerLoader', 'addTinyMCEValidElements'));
             add_filter('teeny_mce_before_init', array('CodeColorerLoader', 'addTinyMCEValidElements'));
         }
