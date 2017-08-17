@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Title</title>
+</head>
+<body>
+<p>
+	回头总结一下js判断数据类型的方法。
+</p>
+
+<h3>
+	1.利用typeof操作符来判断
+</h3>
+<p>用typeof可以判断出来的数据类型</p>
+<pre class="language-javascript">
+	<code>
+		typeof undefined === "undefined";
+		typeof null      === "object";
+		typeof true      === "boolean";
+		typeof 1         === "number";
+		typeof 'str'     === "string";
+		typeof Symbol() === "symbol";//ECMAScript 6 新增
+		typeof function(){} === "function";
+	</code>
+</pre>
+
+<p>
+	用typeof不能判断出来的数据类型（任何其他的对象）
+</p>
+
+<pre class="language-javascript"><code>
+	typeof new Array()  === "object";
+	typeof new Date()   === "object";
+</code></pre>
+
+<p>
+	下面的容易令人迷惑，不要使用！（是使用Boolean,Number,String构造的包装对象，引用自<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/typeof">MDN</a>）
+</p>
+
+<pre class="language-javascript">
+	<code>
+	typeof new Boolean(true) === 'object';
+	typeof new Number(1) ==== 'object';
+	typeof new String("abc") === 'object';
+	</code>
+</pre>
+
+<p>
+	很显然，typeof 是不能完全满足我们的需要的。
+</p>
+
+<h3>
+	2.有鉴于此，ECMAScript 引入了另一个 Java 运算符 instanceof 来解决这个问题。instanceof 运算符与 typeof 运算符相似，用于识别正在处理的对象的类型。与 typeof 方法不同的是，instanceof 方法要求开发者明确地确认对象为某特定类型。
+</h3>
+
+<pre class="language-javascript">
+	<code>
+	new Array() instanceof Array ; //true
+	new Date() instanceof Date ; //true
+	new RegExp() instanceof RegExp ; //true
+	</code>
+</pre>
+
+<p>
+	通常来讲，使用 instanceof 就是判断一个对象是否是某个构造函数的实例。尽管不像 typeof 方法那样灵活，但是在 typeof 方法返回 "object" 的情况下，instanceof 方法还是很有用的。
+</p>
+
+<pre class="language-javascript">
+	<code>
+	// 判断 foo 是否是 Foo 类的实例
+	function Foo(){}
+	var foo = new Foo();
+	console.log(foo instanceof Foo)//true
+	</code>
+</pre>
+<p>
+	从本质上来讲，instanceof比较的是对象的__proto__隐式原型与构造函数的prototype是否全等(参考自《<a href="https://www.ibm.com/developerworks/cn/web/1306_jiangjj_jsinstanceof/">JavaScript instanceof 运算符深入剖析</a>》)
+</p>
+<pre class="language-javascript">
+	<code>
+	// 判断 foo.__proto__ 是否全等于 Foo.prototype
+	function Foo(){}
+	var foo = new Foo();
+	console.log(foo instanceof Foo);//true
+	console.log(foo.__proto__ === Foo.prototype);//true
+	Foo.prototype = {};
+	console.log(foo instanceof Foo);//false
+	</code>
+</pre>
+<p>
+	可见instanceof用于判断内置对象类型以及构造函数的实例还是基本正确的（内置对象和构造函数的prototype都是可以被改变的）。
+</p>
+
+<h3>
+	3.利用constructor属性来判断
+</h3>
+<p>所有对象都会从它的原型上继承一个 constructor 属性</p>
+<pre class="language-javascript">
+	<code>
+		[].constructor === Array;   //true
+		function(){}.constructor === Function;   //true
+		{}.constructor === Object;   //true
+		(new Date).constructor === Date;   //true
+		(new Error).constructor === Error;   //true
+		(new RegExp).constructor === RegExp;   //true
+		(new String).constructor === String;   //true
+		"test".constructor === String;   //true
+	</code>
+</pre>
+<p>
+	也正是因为是从原型上继承的constructor，一旦这个属性被改变，则结果也会改变
+</p>
+<pre class="language-javascript">
+	<code>
+		var arr = new Array();
+		arr.constructor = function(){};
+		arr.constructor === Array;   //false
+
+		//或者
+		Array.prototype.constructor = function(){};
+		var arr2 = new Array();
+		arr2.constructor === Array;   //false
+	</code>
+</pre>
+<p>
+	可见constructor用于判断数据类型还是只能说基本正确的。
+</p>
+
+
+
+
+
+</body>
+<script>
+	function Foo(a){
+		this.name = a ;
+	}
+	var arr = new Foo('Jim');
+	console.log(Foo.prototype);
+	Foo.prototype = function () {
+
+	};
+	console.log(arr instanceof Foo);
+	console.log(arr.__proto__);
+	console.log({}.constructor === Object)
+
+</script>
+</html>
