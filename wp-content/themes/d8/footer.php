@@ -42,5 +42,6 @@ if($dHasShare == true){
 } 
 if( dopt('d_footcode_b') ) echo dopt('d_footcode'); 
 ?>
+<script src="/wp-includes/js/prism.js"></script>
 </body>
 </html>

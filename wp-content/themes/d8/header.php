@@ -11,6 +11,7 @@ wp_enqueue_style( 'style', get_stylesheet_uri(), array(), '2.0' );
 wp_head(); 
 
 if( dopt('d_headcode_b') ) echo dopt('d_headcode'); ?>
+	<link rel="stylesheet" href="/wp-includes/css/prism.css">
 <!--[if lt IE 9]><script src="<?php bloginfo('template_url'); ?>/js/html5.js"></script><![endif]-->
 </head>
 <body <?php body_class(); ?>>
