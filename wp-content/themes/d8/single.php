@@ -50,4 +50,7 @@
 
 	</div>
 </div>
+	<link rel="stylesheet" href="/wp-includes/css/prism.css">
+<script src="/wp-includes/js/prism.js"></script>
+
 <?php get_sidebar(); get_footer(); ?>
