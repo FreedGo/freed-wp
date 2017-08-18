@@ -1,0 +1,124 @@
+# Translation of WordPress - 4.7.x in LANGUAGE NAME
+# This file is distributed under the same license as the WordPress - 4.7.x package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: YYYY-MM-DD HR:MI:SE+ZONE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: LANGUAGE SHORT CODE\n"
+"Project-Id-Version: WordPress - 4.7.x\n"
+
+#: editormd_options.php:6
+msgid "Use Markdown For Comments"
+msgstr ""
+
+#: editormd_options.php:7
+msgid "Dark Style Theme"
+msgstr ""
+
+#: editormd_options.php:8
+msgid "Support Task Lists"
+msgstr ""
+
+#: editormd_options.php:9
+msgid "Support Syntax Highlightjs"
+msgstr ""
+
+#: editormd_options.php:10
+msgid "Prism.js Highlightjs Library"
+msgstr ""
+
+#: editormd_options.php:11
+msgid "Prism.js Highlightjs Style"
+msgstr ""
+
+#: editormd_options.php:12
+msgid "Prism.js Line Numbers"
+msgstr ""
+
+#: editormd_options.php:13
+msgid "Support Emoji"
+msgstr ""
+
+#: editormd_options.php:14
+msgid "Emoji Library"
+msgstr ""
+
+#: editormd_options.php:15
+msgid "Support LaTeX"
+msgstr ""
+
+#: editormd_options.php:16
+msgid "LaTeX Editor Library"
+msgstr ""
+
+#: editormd_options.php:17
+msgid "Support TOC"
+msgstr ""
+
+#: editormd_options.php:18
+msgid "Support Image Paste"
+msgstr ""
+
+#: editormd_options.php:19
+msgid "Support FlowChart"
+msgstr ""
+
+#: editormd_options.php:20
+msgid "FlowChart Library"
+msgstr ""
+
+#: editormd_options.php:21
+msgid "jQuery FlowChart Library"
+msgstr ""
+
+#: editormd_options.php:22
+msgid "Support Sequence"
+msgstr ""
+
+#: editormd_options.php:23
+msgid "Sequence Library"
+msgstr ""
+
+#: editormd_options.php:24
+msgid "Close Sync Scrolling"
+msgstr ""
+
+#: editormd_options.php:25
+msgid "Support HTML Code"
+msgstr ""
+
+#: editormd_options.php:26
+msgid "Raphael Library"
+msgstr ""
+
+#: editormd_options.php:27
+msgid "Underscore Library"
+msgstr ""
+
+#: editormd_options.php:28
+msgid "jQuery Library"
+msgstr ""
+
+#: editormd_options.php:42
+msgid "Go"
+msgstr ""
+
+#: editormd_options.php:122
+msgid "You need install the plugin"
+msgstr ""
+
+#: editormd_options.php:226
+msgid "Editor.md Options"
+msgstr ""
+
+#: editormd_options.php:227
+msgid "Welcome to WordPress Editor.md Markdown Text Editor"
+msgstr ""
+
+#: editormd_options.php:231
+msgid "Settings"
+msgstr ""
