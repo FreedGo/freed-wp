@@ -30,9 +30,8 @@ window._deel = {
     roll: [<?php echo $sr_1 ?>,<?php echo $sr_2 ?>]
 }
 </script>
-<script src="<?php bloginfo('template_url'); ?>/js/jquery.js?ver=2.0"></script>
-<?php 
-wp_enqueue_script( 'jquery', get_bloginfo("template_url").'/js/jquery.js', array(), '2.1' );
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<?php
 
 wp_footer(); 
 
