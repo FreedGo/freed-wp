@@ -43,20 +43,20 @@ if( dopt('d_headcode_b') ) echo dopt('d_headcode'); ?>
 			</div>
 		</div>
 	</div>
-	<div class="speedbar">
-		<?php 
-		if( dopt('d_sign_b') ){ 
-			global $current_user; 
-			get_currentuserinfo();
-			$uid = $current_user->ID;
-			$u_name = get_user_meta($uid,'nickname',true);
-		?>
-			<div class="pull-right">
-				<?php if(is_user_logged_in()){echo '<i class="icon-user icon12"></i> '.$u_name.' &nbsp; '; echo '<a href="http://www.daqianduan.com/profile/">会员中心</a>'; echo ' &nbsp; &nbsp; <i class="icon-off icon12"></i> ';}else{echo '<i class="icon-user icon12"></i> ';}; wp_loginout(); ?>
-			</div>
-		<?php } ?>
-		<div class="toptip"><strong class="text-success">最新消息：</strong><?php echo dopt('d_tui'); ?></div>
-	</div>
+	<!--<div class="speedbar">-->
+	<!--	--><?php
+	// 	if( dopt('d_sign_b') ){
+	// 		global $current_user;
+	// 		get_currentuserinfo();
+	// 		$uid = $current_user->ID;
+	// 		$u_name = get_user_meta($uid,'nickname',true);
+	// 	?>
+	<!--		<div class="pull-right">-->
+	<!--			--><?php //if(is_user_logged_in()){echo '<i class="icon-user icon12"></i> '.$u_name.' &nbsp; '; echo '<a href="http://www.daqianduan.com/profile/">会员中心</a>'; echo ' &nbsp; &nbsp; <i class="icon-off icon12"></i> ';}else{echo '<i class="icon-user icon12"></i> ';}; wp_loginout(); ?>
+	<!--		</div>-->
+	<!--	--><?php //} ?>
+	<!--	<div class="toptip"><strong class="text-success">最新消息：</strong>--><?php //echo dopt('d_tui'); ?><!--</div>-->
+	<!--</div>-->
 </header>
 <section class="container">
 	<?php if( dopt('d_adsite_01_b') ) echo '<div class="banner banner-site">'.dopt('d_adsite_01').'</div>'; ?>
