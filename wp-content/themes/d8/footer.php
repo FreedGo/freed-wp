@@ -2,7 +2,7 @@
 <footer class="footer">
     <div class="footer-inner">
         <div class="copyright pull-left">
-           &copy; <?php echo date('Y'); ?> <a href="<?php bloginfo('url'); ?>">
+		        Copyright © 2017 Freed All Rights Reserved 鲁ICP备17011856号
         </div>
         <div class="trackcode pull-right">
             <?php if( dopt('d_track_b') ) echo dopt('d_track'); ?>
