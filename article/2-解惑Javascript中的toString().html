@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Title</title>
+</head>
+<body>
+
+
+<h3>
+	在上一篇文章<a href="http://test.yunlongfu.com/index.php/2017/08/15/datatype/">《判断JavaScript中数据的具体类型总结》</a>中，
+	总结了一个判断JavaScript数据类型的通用方法
+</h3>
+<p>利用Object.prototype.toString()方法</p>
+<pre class="language-javascript">
+	<code>
+		Object.prototype.toString.call([]);         //"[object Array]"
+	</code>
+</pre>
+
+<p>
+	但是我们又有了这样的疑惑：
+</p>
+
+<pre class="language-javascript">
+	<code>
+	[1,2,3].toString();//"1,2,3"
+	'123'.toString()  ;//"123"
+	(function () { return 123 }).toString();// "function () { return 123 }"
+	(new Date()).toString();"Tue May 10 2016 09:11:31 GMT+0800 (CST)"
+	</code>
+</pre>
+
+<p>
+	在JavaScript中，我们知道一切皆对象，如 [1,2,3].prototype指向Array，而Array.prototype指向Object，
+	那么为什么[1,2,3]调用toSting()方法得到的结果跟Object.prototype.toSting()不一样呢？
+</p>
+<p>
+	我们知道原型上的方法是可以被自定义的，而数组、字符串、函数、Date对象,RegExp对象等都分别部署了自己版本的toString方法，
+	覆盖了Object.prototype.toString方法。
+</p>
+
+<h4>
+	参考链接：
+</h4>
+<p>
+	[ 1 ] 阮一峰，<a href="http://javascript.ruanyifeng.com/stdlib/object.html">《JavaScript 标准参考教程（alpha）》</a>
+</p>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

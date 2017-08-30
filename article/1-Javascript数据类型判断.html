@@ -126,8 +126,98 @@
 	</code>
 </pre>
 <p>
-	可见constructor用于判断数据类型还是只能说基本正确的。
+	另：使用instaceof和construcor,被判断的array必须是在当前页面声明的！比如，一个页面（父页面）有一个框架，框架中引用了一个页面（子页面），在子页面中声明了一个array，并将其赋值给父页面的一个变量，这时判断该变量，Array == object.constructor;会返回false；
 </p>
+<p>
+	原因：
+	1、array属于引用型数据，在传递过程中，仅仅是引用地址的传递。
+	2、每个页面的Array原生对象所引用的地址是不一样的，在子页面声明的array，所对应的构造函数，是子页面的Array对象；父页面来进行判断，使用的Array并不等于子页面的Array；切记，不然很难跟踪问题！
+</p>
+<p>
+	可见constructor用于判断数据类型还是只能说基本正确的,实际使用效果仍然差强人意。
+</p>
+<h3>
+	4.基本完美解决方案Object.prototype.toString.call()（为什么说基本，因为js一切皆有可能，还有兼容性）
+</h3>
+<p>我们知道，Javascript中，一切皆为对象，ECMA中有这样一个方法，Object.prototype.toString：
+	Object.prototype.toString( )
+	When the toString method is called, the following steps are taken:
+	1. Get the [[Class]] property of this object.
+	2. Compute a string value by concatenating the three strings “[object “, Result (1), and “]”.
+
+	3. Return Result (2)</p>
+
+<pre class="language-javascript">
+	<code>
+		Object.prototype.toString.call('test');     //"[object String]"
+		Object.prototype.toString.call(1);          //"[object Number]"
+		Object.prototype.toString.call(true);       //"[object Boolean]"
+		Object.prototype.toString.call(null);       //"[object Null]"
+		Object.prototype.toString.call(undefined);  //"[object Undefined]"
+		Object.prototype.toString.call({});         //"[object Object]"
+		Object.prototype.toString.call([]);         //"[object Array]"
+		Object.prototype.toString.call(/^\d$/);     //"[object RegExp]"
+		Object.prototype.toString.call(new Date()); //"[object Date]"
+	</code>
+</pre>
+<p>
+	甚至可以判断更多
+</p>
+<pre class="language-javascript">
+	<code>
+		&lt;ul class="list"&gt;
+			&lt;!--这是注释--&gt;
+			&lt;li&gt;列表1&lt;/li&gt;
+			&lt;li&gt;列表1&lt;/li&gt;
+		&lt;/ul&gt;
+	</code>
+</pre>
+<pre class="language-javascript">
+	<code>
+		var list = docunt.querySelector('.list');
+
+		Object.prototype.toString.call(list.childNodes[0]);     //"[object Text]"
+		Object.prototype.toString.call(list.childNodes[1]);     //"[object Comment]"
+		Object.prototype.toString.call(list.childNodes[3]);     //"[object HTMLLIElement]"
+	</code>
+</pre>
+
+<p>
+	最后，引用阮一峰，<a href="http://javascript.ruanyifeng.com/stdlib/object.html">《JavaScript 标准参考教程（alpha）》</a>中对数据类型判断的一个封装
+</p>
+<pre class="language-javascript">
+	<code>
+		var type = function (o){
+			var s = Object.prototype.toString.call(o);
+			return s.match(/\[object (.*?)\]/)[1].toLowerCase();
+		};
+		['Null',
+			'Undefined',
+			'Object',
+			'Array',
+			'String',
+			'Number',
+			'Boolean',
+			'Function',
+			'RegExp'
+		].forEach(function (t) {
+			type['is' + t] = function (o) {
+				return type(o) === t.toLowerCase();
+			};
+		});
+
+		console.log(type({})); // "object"
+		console.log(type([])); // "array"
+		console.log(type(5)); // "number"
+		console.log(type(null)); // "null"
+
+		console.log(type.isObject({})); // true
+		console.log(type.isArray([])); // true
+		console.log(type.isRegExp(/\d+/)); // true
+	</code>
+</pre>
+
+
 
 
 
@@ -135,17 +225,33 @@
 
 </body>
 <script>
-	function Foo(a){
-		this.name = a ;
-	}
-	var arr = new Foo('Jim');
-	console.log(Foo.prototype);
-	Foo.prototype = function () {
-
+	var type = function (o){
+		var s = Object.prototype.toString.call(o);
+		return s.match(/\[object (.*?)\]/)[1].toLowerCase();
 	};
-	console.log(arr instanceof Foo);
-	console.log(arr.__proto__);
-	console.log({}.constructor === Object)
+	['Null',
+		'Undefined',
+		'Object',
+		'Array',
+		'String',
+		'Number',
+		'Boolean',
+		'Function',
+		'RegExp'
+	].forEach(function (t) {
+		type['is' + t] = function (o) {
+			return type(o) === t.toLowerCase();
+		};
+	});
+
+	console.log(type({})); // "object"
+	console.log(type([])); // "array"
+	console.log(type(5)); // "number"
+	console.log(type(null)); // "null"
+
+	console.log(type.isObject({})); // true
+	console.log(type.isArray([])); // true
+	console.log(type.isRegExp(/\d+/)); // true
 
 </script>
 </html>
