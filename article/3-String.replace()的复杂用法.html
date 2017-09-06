@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>3-String.replace()的复杂用法</title>
+</head>
+<body>
+
+
+<h3>
+	最近做项目中，多次遇到了替换字符串的内容的需求，并且较为繁琐，例如
+</h3>
+<p>把“我喜欢的水果有草莓、西瓜、苹果、桔子、葡萄”中的水果全部替换成英文,按着以前的简单用法</p>
+<pre class="language-javascript">
+	<code>
+		var str = '我喜欢的水果有草莓、西瓜、苹果、桔子、葡萄';
+		var newStr = str.replace(/草莓/,'strawberry')
+				.replace(/西瓜/g,'watermelon')
+				.replace(/苹果/g,'apple')
+				.replace(/桔子/g,'orange ')
+				.replace(/葡萄/g,'grape');
+	</code>
+</pre>
+
+<p>
+	写成这样我想谁都会特别不爽，于是去查是否有更加简便的写法，即repalce（）的复杂用法
+</p>
+<p>
+	repalce（）的复杂用法1：
+	replace方法的第二个参数可以使用美元符号$，用来指代所替换的内容。
+<p>
+<p>
+	$& 指代匹配的子字符串。
+	$` 指代匹配结果前面的文本。
+	$' 指代匹配结果后面的文本。
+	$n 指代匹配成功的第n组内容，n是从1开始的自然数。
+	$$ 指代美元符号$。
+</p>
+<pre class="language-javascript">
+	<code>
+	'hello world'.replace(/(\w+)\s(\w+)/, '$2 $1');//=>"world hello"
+	</code>
+</pre>
+
+<p>
+	repalce（）的复杂用法2：
+	replace方法的第二个参数还可以是一个函数，将每一个匹配内容替换为函数返回值。
+</p>
+<p>
+	match   :  匹配的子串。（对应于上述的$&。）
+	p1,p2, ...  :  假如replace()方法的第一个参数是一个RegExp 对象，则代表第n个括号匹配的字符串。（对应于上述的$1，$2等。）
+	offset  :   匹配到的子字符串在原字符串中的偏移量。（比如，如果原字符串是“abcd”，匹配到的子字符串是“bc”，那么这个参数将是1）
+	string  :	被匹配的原字符串。
+</p>
+<pre class="language-javascript">
+	<code>
+		var prices = {
+		  'pr_1': '$1.99',
+		  'pr_2': '$9.99',
+		  'pr_3': '$5.00'
+		};
+
+		var template = '<span id="pr_2"></span><span id="pr_1"></span><span id="pr_3"></span>'; // 这里可以放网页模块字符串
+
+		var newTemplate = template.replace(
+		  /(<span id=")(.*?)(">)(<\/span>)/g,
+		  function(match, $1, $2, $3, $4){
+		    return $1 + $2 + $3 + prices[$2] + $4;
+		  }
+		);
+		//=>'<span id="pr_2">$9.99</span><span id="pr_1">$1.99</span><span id="pr_3">$5.00</span>'
+	</code>
+</pre>
+<p>
+	此时，本文用例可以改为
+</p>
+<pre class="language-javascript">
+	<code>
+	var str = '我喜欢的水果有草莓、西瓜、苹果、桔子、葡萄';
+	var	newStr = str.replace(/(草莓)|(西瓜)|(苹果)|(桔子)|(葡萄)/g,function(match,$1,$2,$3,$4,$5){
+			if($1){return 'strawberry'};
+			if($2){return 'watermelon'};
+			if($3){return 'apple'};
+			if($4){return 'orange'};
+			if($5){return 'grape'};
+		});
+		//=>"我喜欢的水果有strawberry、watermelon、apple、orange、grape"
+	</code>
+</pre>
+<p>或者：</p>
+<pre class="language-javascript">
+	<code>
+	var str = '我喜欢的水果有草莓、西瓜、苹果、桔子、葡萄';
+	var	newStr = str.replace(/(草莓)|(西瓜)|(苹果)|(桔子)|(葡萄)/g,function(match,$1,$2,$3,$4,$5){
+			switch(match){
+				case '草莓':
+				return 'strawberry';
+				case '西瓜':
+				return 'watermelon';
+				case '苹果':
+				return 'apple';
+				case '桔子':
+				return 'orange';
+				case '葡萄':
+				return 'grape';
+			}
+		});
+		//=>"我喜欢的水果有strawberry、watermelon、apple、orange、grape"
+	</code>
+</pre>
+
+<h4>
+	参考链接：
+</h4>
+<p>
+	[ 1 ] 阮一峰，<a href="http://javascript.ruanyifeng.com/stdlib/regexp.html">《JavaScript 标准参考教程（alpha）》</a>
+</p>
+
+
+
+
+
+
+
+
+</body>
+<script>
+	var str = '我喜欢的水果有草莓、西瓜、苹果、桔子、葡萄';
+	newStr = str.replace(/草莓/,'strawberry').replace(/西瓜/,'watermelon').replace(/苹果/,'apple').replace(/桔子/,'orange ').replace(/葡萄/,'grape');
+	console.log(newStr);
+</script>
+</html>
